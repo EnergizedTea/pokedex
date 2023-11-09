@@ -27,7 +27,7 @@ export const Pokedex = () => {
         })
     }, [setPokemons])
   return (
-    <div>
+    <div className = 'guarderia'>
         {pokemons.map((pokemon) => {
             return <Pokemon key={pokemon.id} pokemon={pokemon}/>
         })}
