@@ -3,6 +3,7 @@ import pokeLogo from './assets/pokebola.png'
 import { Pokedex } from './components/Pokedex'
 import './App.css'
 
+
 function App() {
 
   return (

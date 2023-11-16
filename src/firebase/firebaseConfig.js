@@ -4,14 +4,15 @@ import { getFirestore } from "firebase/firestore"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration NEVER REVEAL THIS SHIT DIEGO
+// Your web app's Firebase configuration NEVER REVEAL THIS SHIT DIEGO i fucked up diego :(
+// nos lo llevamos a env.local
 const firebaseConfig = {
-  apiKey: "AIzaSyB1KuBResmPuYPqWDAfX8qLIg1qU_GDYEU",
-  authDomain: "pokedex-493b0.firebaseapp.com",
-  projectId: "pokedex-493b0",
-  storageBucket: "pokedex-493b0.appspot.com",
-  messagingSenderId: "863289489944",
-  appId: "1:863289489944:web:1599e89fb8d4a2b0df216d"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
 };
 
 // Initialize Firebase

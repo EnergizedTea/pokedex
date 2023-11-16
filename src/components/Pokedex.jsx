@@ -3,6 +3,9 @@ import { Pokemon } from './Pokemon'
 import axios from 'axios'
 import db from '../firebase/firebaseConfig'
 import { collection, addDoc } from 'firebase/firestore'
+
+
+
 export const Pokedex = () => {
     const [pokemons, setPokemons] = useState([])
 
@@ -27,11 +30,13 @@ export const Pokedex = () => {
            })
         })
     }, [setPokemons])
+
   return (
     <div className = 'guarderia'>
         {pokemons.map((pokemon) => {
             return <Pokemon key={pokemon.id} pokemon={pokemon}/>
         })}
+    
     </div>
   )
 }
