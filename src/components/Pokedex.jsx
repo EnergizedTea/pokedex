@@ -2,14 +2,15 @@ import React, {useState, useEffect} from 'react'
 import { Pokemon } from './Pokemon'
 import axios from 'axios'
 import db from '../firebase/firebaseConfig'
-import { collection, addDoc } from 'firebase/firestore'
-
+import { collection, doc, addDoc, onSnapshot } from 'firebase/firestore'
 
 
 export const Pokedex = () => {
     const [pokemons, setPokemons] = useState([])
+    const [team, setTeam] = useState([])
+    const [page, setPage] = useState(1)
 
-    const url = "https://pokeapi.co/api/v2/pokemon"
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(page - 1) * 20}`
     useEffect(() => {
         axios.get(url).then((response) =>{
            // setPokemons(response.data.results)
@@ -29,14 +30,39 @@ export const Pokedex = () => {
             setPokemons(pokemonData)
            })
         })
-    }, [setPokemons])
+    }, [setPokemons, page])
+
+
+    useEffect(() => {
+        const unsub = onSnapshot(doc(db, "teams", "principal"), (snapshot) => {
+            const data = snapshot.data();
+
+            Object.keys(data).forEach((key) => {
+                console.log(`$`)
+            })
+            console.log(snapshot.data())
+            snapshot.map((doc) => {
+                console.log(doc)
+            })
+
+            console.log(snapshot.data(snapshot.map()))
+        })
+    }, [])//la lista vacia causa que esto solo suceda una vez
 
   return (
-    <div className = 'guarderia'>
-        {pokemons.map((pokemon) => {
-            return <Pokemon key={pokemon.id} pokemon={pokemon}/>
-        })}
-    
+    <div>
+        <div>
+                {
+                    page != 1 && <button onClick={() => setPage(page - 1)}>Anterior</button>
+                }
+                <button onClick={() => setPage(page + 1)}>Siguiente</button>
+        </div>
+                <br></br>
+        <div className = 'guarderia'>   
+            {pokemons.map((pokemon) => {
+                return <Pokemon key={pokemon.id} pokemon={pokemon}/>
+            })}
+        </div>
     </div>
   )
 }
