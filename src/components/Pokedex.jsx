@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { Pokemon } from './Pokemon'
 import axios from 'axios'
-
+import db from '../firebase/firebaseConfig'
+import { collection, addDoc } from 'firebase/firestore'
 export const Pokedex = () => {
     const [pokemons, setPokemons] = useState([])
 
